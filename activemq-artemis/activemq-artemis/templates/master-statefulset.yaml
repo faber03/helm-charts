@@ -9,6 +9,8 @@ metadata:
 spec:
   serviceName: {{ include "artemis.fullname" . }}-master
   replicas: {{ .Values.replicas }}
+  updateStrategy:
+    type: RollingUpdate
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -48,8 +50,6 @@ spec:
                   release: {{ .Release.Name | quote }}
                   component: slave
         {{- end }}
-      strategy:
-        type: Recreate
       containers:
       - name: {{ include "artemis.fullname" . }}
         image: {{ template "artemis.image" . }}
