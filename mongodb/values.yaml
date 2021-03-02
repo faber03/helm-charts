@@ -57,7 +57,7 @@ clusterDomain: cluster.local
 
 ## MongoDB(R) architecture. Allowed values: standalone or replicaset
 ##
-architecture: standalone
+architecture: replicaset
 
 ## Use StatefulSet instead of Deployment when deploying standalone
 ##
@@ -69,11 +69,11 @@ auth:
   ## Enable authentication
   ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
   ##
-  enabled: true
+  enabled: false
   ## MongoDB(R) root password
   ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
   ##
-  rootPassword: ""
+  rootPassword: "admin"
   ## MongoDB(R) custom user and database
   ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#creating-a-user-and-database-on-first-run
   ##
@@ -571,9 +571,9 @@ externalAccess:
   service:
     ## Service type. Allowed values: LoadBalancer or NodePort
     ##
-    type: LoadBalancer
+    type: NodePort
     ## Port used when service type is LoadBalancer
-    ##
+    ## use nodeport cos we don't have loadbalancer at the moment
     port: 27017
     ## Array of load balancer IPs for each MongoDB(R) node. Length must be the same as replicaCount
     ## Example:
@@ -611,7 +611,7 @@ arbiter:
   ## Enable deploying the MongoDB(R) Arbiter
   ##   https://docs.mongodb.com/manual/tutorial/add-replica-set-arbiter/
   ##
-  enabled: true
+  enabled: false
 
   ## MongoDB(R) configuration file for the Arbiter. For documentation of all options, see:
   ##   http://docs.mongodb.org/manual/reference/configuration-options/
