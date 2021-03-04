@@ -1,0 +1,10 @@
+{
+  "name": "mongodb-sink",
+  "config": {
+    "connection.uri":"mongodb://mongodb-replicaset-0.mongodb-replicaset-headless.promenade.svc.cluster.local:27017",
+    "topics": "Chatillon-Northbound",
+    "database": "test",
+    "collection": "Chatillon",
+    "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector"
+  }
+}
