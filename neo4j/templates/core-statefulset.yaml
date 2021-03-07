@@ -19,13 +19,17 @@ spec:
         app: {{ template "neo4j.name" . }}
         component: core
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: compute3
+#      nodeSelector:
+#        kubernetes.io/hostname: compute3
       containers:
         - name: {{ template "neo4j.fullname" . }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
           imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           env:
+            - name: NEO4J_metrics_prometheus_enabled  #metrics.prometheus.enabled=true
+              value: "true"
+            - name: NEO4J_metrics_prometheus_endpoint #metrics.prometheus.endpoint=0.0.0.0:2004
+              value: "0.0.0.0:2004"
             - name: NEO4J_ACCEPT_LICENSE_AGREEMENT
               value: "{{ .Values.acceptLicenseAgreement }}"
             - name: NEO4J_dbms_logs_query_enabled
@@ -91,6 +95,8 @@ spec:
               name: browser
             - containerPort: 7687
               name: bolt
+            - containerPort: 2004
+              name: metrics
           volumeMounts:
             - name: datadir
               mountPath: "{{ .Values.core.persistentVolume.mountPath }}"
@@ -100,10 +106,10 @@ spec:
             - name: plugins
               mountPath: /plugins
           resources:
-            limits:
-              cpu: 1900m
-            requests:
-              cpu: 1900m
+            limits:      # 1,9 core tetto massimo (limit >= request altrimenti il pod non si avvia) - overbooking
+              cpu: 1000m #1900m
+            requests:    # valore monopolizzato dal pod, indipendentemente dalle risorse reali impiegate
+              cpu: 1000m #1900m
 {{/*            {{ toYaml .Values.resources | indent 10 }}*/}}
             {{- if .Values.core.sidecarContainers }}
             {{ toYaml .Values.core.sidecarContainers | indent 6 }}

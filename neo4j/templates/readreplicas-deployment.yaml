@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "neo4j.name" . }}
+        app: {{ template "neo4j.name" . }}-read
         release: {{ .Release.Name | quote }}
         component: replica
     spec:
@@ -84,9 +84,9 @@ spec:
           mountPath: /plugins
         resources:
           limits:
-            cpu: 5600m
+            cpu: 1000m #5600m
           requests:
-            cpu: 5600m
+            cpu: 1000m #5600m
 {{- if .Values.core.sidecarContainers }}
 {{ toYaml .Values.core.sidecarContainers | indent 6 }}
 {{- end }}
