@@ -10,9 +10,10 @@ oc project tesi-delucia
 #helm delete neo4j
 #helm install neo4j .
 
-#(cd neo4j || exit
+(cd neo4j || exit
 #helm delete neo4j
-#helm install neo4j .)
+#sleep 30
+helm install neo4j .)
 
 #ARTEMIS
 #-------
@@ -44,7 +45,7 @@ curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json 
 
 sleep 45
 
-(cd cp-kafka-helm-charts/charts/cp-kafka-connect-neo4j || exit;
+(cd config || exit;
 curl -s -X POST -H 'Content-Type: application/json' --data @neo4j-sink.json  http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors)
 
 #curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink.json  http://connect-mongo-promenade.router.default.svc.cluster.local/connectors)
