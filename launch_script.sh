@@ -26,17 +26,20 @@ oc project tesi-delucia
 (cd activemq-artemis/activemq-artemis || exit
 helm delete artemis
 oc delete pvc data-artemis-activemq-artemis-master-0
-oc delete pvc artemis-activemq-artemisbash
+oc delete pvc artemis-activemq-artemis
+sleep 30
 helm install artemis .)
 
 #cd cp-kafka-helm-charts || exit
 #./kafka_launch_script.sh
-(cd cp-kafka-helm-charts || exit; ./kafka_launch_script.sh)
+(cd cp-kafka-helm-charts || exit;
+./kafka_launch_script.sh
+)
 
 sleep 90
 
 ###Create connectors instances
-(cd cp-kafka-helm-charts/charts/cp-kafka-connect-artemis || exit;
+(cd config || exit;
 curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json  http://connect-artemis-tesi-delucia.router.default.svc.cluster.local/connectors)
 
 sleep 45

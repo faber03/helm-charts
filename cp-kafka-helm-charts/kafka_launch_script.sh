@@ -21,6 +21,8 @@ oc delete pvc datalogdir-kafka-cp-zookeeper-0
 oc delete pvc datalogdir-kafka-cp-zookeeper-1
 oc delete pvc datalogdir-kafka-cp-zookeeper-2
 
+sleep 30
+
 helm install kafka .
 
 cd charts/cp-kafka-connect-artemis || exit
