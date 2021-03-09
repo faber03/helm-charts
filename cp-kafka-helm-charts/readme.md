@@ -1,4 +1,4 @@
-### Launch a new connector instance
+/### Launch a new connector instance
 ```
 cd /etc; curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json http://localhost:8083/connectors
 cd /etc/neo4j; curl -s -X POST -H 'Content-Type: application/json' --data @neo4j-sink.json http://localhost:8083/connectors

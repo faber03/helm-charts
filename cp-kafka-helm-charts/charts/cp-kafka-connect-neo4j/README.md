@@ -1,3 +1,15 @@
+#Old deployment
+
+              confluent-hub install --no-prompt neo4j/kafka-connect-neo4j:1.0.7
+              cd /usr/share/confluent-hub-components/neo4j-kafka-connect-neo4j/lib && rm kotlin-reflect-1.2.51.jar
+              wget https://github.com/Samuele-Paglia/ASSD_project/raw/master/libs/kotlin-reflect-1.3.72.jar
+              echo \
+              {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
+              /etc/confluent/docker/run &
+
+              $CUSTOM_SCRIPT_PATH
+              sleep infinity
+
 # CP-Kafka Connect Helm Chart
 
 This chart bootstraps a deployment of a Confluent Kafka Connect

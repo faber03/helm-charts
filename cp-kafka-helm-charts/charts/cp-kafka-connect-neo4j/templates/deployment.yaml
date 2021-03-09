@@ -107,9 +107,9 @@ spec:
             - /bin/bash
             - -c
             - |
-              confluent-hub install --no-prompt neo4j/kafka-connect-neo4j:1.0.7
-              cd /usr/share/confluent-hub-components/neo4j-kafka-connect-neo4j/lib && rm kotlin-reflect-1.2.51.jar
-              wget https://github.com/Samuele-Paglia/ASSD_project/raw/master/libs/kotlin-reflect-1.3.72.jar
+              cd /usr/share/confluent-hub-components && mkdir neo4j-connector
+              cd neo4j-connector && mkdir etc && mkdir lib && cd lib
+              wget http://192.168.10.24/Neo4jSink.jar
               echo \
               {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
               /etc/confluent/docker/run &
