@@ -41,6 +41,7 @@ configurationOverrides:
   # "auto.create.topics.enable": false
   #"log.retention.ms": "3600000"
   "log.retention.hours": "3" #fixed no disk left on device
+  "num.partitions": "3"
 
   ## Options required for external access via NodePort
   ## ref:

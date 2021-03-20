@@ -5,7 +5,7 @@ oc login -u adelucia -p fr57gyL master.unisannio.local:8443
 oc project tesi-delucia
 
 #NEO4j
-#helm delete neo4j
+helm delete neo4j
 
 #ARTEMIS
 #-------
