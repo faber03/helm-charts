@@ -103,8 +103,8 @@ spec:
         - name: data
           mountPath: /var/lib/artemis-instance/data
         - name: configure
-          #mountPath: /opt/configure
-          mountPath: /var/lib/artemis/etc-override
+          mountPath: /opt/configure
+          #mountPath: /var/lib/artemis/etc-override
       volumes:
       - name: configure
         configMap:
