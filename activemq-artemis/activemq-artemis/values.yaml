@@ -4,8 +4,10 @@ image:
   registry: docker.io
   # image.repository is the ActiveMQ Artemis image name
   repository: adeiasiodq/artemis
+  #repository: stinago/artemis
   # image.tag is the ActiveMQ Artemis image's tag: https://hub.docker.com/r/vromero/activemq-artemis/tags
   tag: 1.5
+  #tag: 2.7
   # image.pullPolicy is the ActiveMQ Artemis image's pull policy
   pullPolicy: Always
   # image.pullSecrets optionally specify an array of imagePullSecrets.Secrets must be manually created in the namespace.

@@ -48,3 +48,9 @@ oc delete pvc datadir-0-kafka-cp-kafka-0
 oc delete pvc datalogdir-kafka-cp-zookeeper-0
 oc delete pvc datalogdir-kafka-cp-zookeeper-1
 oc delete pvc datalogdir-kafka-cp-zookeeper-2
+
+#eliminazione connettori
+#-----------------------
+curl -s -X DELETE http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors/neo4j-sink
+
+curl -s -X DELETE http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors/artemis-source

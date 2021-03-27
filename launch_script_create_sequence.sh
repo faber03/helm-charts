@@ -48,4 +48,3 @@ sleep 45
 
 (cd config || exit;
 curl -s -X POST -H 'Content-Type: application/json' --data @neo4j-sink.json  http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors)
-

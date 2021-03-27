@@ -109,7 +109,7 @@ spec:
             - |
               cd /usr/share/confluent-hub-components && mkdir neo4j-connector
               cd neo4j-connector && mkdir etc && mkdir lib && cd lib
-              wget http://192.168.10.24/Neo4jSink.jar
+              wget http://192.168.10.105/Neo4jSink.jar
               echo \
               {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
               /etc/confluent/docker/run &

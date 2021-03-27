@@ -29,6 +29,8 @@ spec:
     spec:
       securityContext:
         fsGroup: 200
+        runAsUser: 1000
+        runAsGroup: 1000
       affinity:
         podAntiAffinity:
         {{- if eq .Values.antiAffinity "hard" }}
@@ -54,7 +56,7 @@ spec:
 #      initContainers:
 #        - name: volume-mount-hack
 #          image: busybox
-#          command: [ "sh", "-c", "chmod -R 777 /var/lib/artemis-instance/etc" ]
+#          command: [ "sh", "-c", "wget --no-check-certificate --content-disposition https://github.com/faber03/helm-charts/blob/master/activemq-artemis/broker.xml" ]
 #          volumeMounts:
 #            - name: configure
 #              mountPath: /var/lib/artemis-instance/etc
@@ -63,6 +65,8 @@ spec:
       - name: {{ include "artemis.fullname" . }}
         image: {{ template "artemis.image" . }}
         imagePullPolicy: {{ .Values.image.imagePullPolicy | quote }}
+#        securityContext:
+#          allowPrivilegeEscalation: true
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         env:
@@ -79,6 +83,13 @@ spec:
           value: "true"
 #        - name: BROKER_HOME
 #          value: "/var/lib/artemis-instance"
+
+#        command:
+#          - /bin/bash
+#          - -c
+#          - |
+#          - cd /var/lib/artemis-instance/etc
+#          - wget --no-check-certificate --content-disposition https://github.com/faber03/helm-charts/blob/master/activemq-artemis/broker.xml
 
         ports:
         - name: http
@@ -104,7 +115,7 @@ spec:
           mountPath: /var/lib/artemis-instance/data
         - name: configure
           mountPath: /opt/configure
-          #mountPath: /var/lib/artemis/etc-override
+          #mountPath: /var/lib/artemis-instance/etc-override
       volumes:
       - name: configure
         configMap:
