@@ -5,6 +5,7 @@
     "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
 
     "tasks.max": "3",
+    "neo4j.batch.size": "10",
 
     "errors.retry.timeout": "-1",
     "errors.retry.delay.max.ms": "1000",
