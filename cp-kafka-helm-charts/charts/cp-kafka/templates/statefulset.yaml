@@ -39,6 +39,8 @@ spec:
       {{- end }}
       {{- end }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: compute4
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

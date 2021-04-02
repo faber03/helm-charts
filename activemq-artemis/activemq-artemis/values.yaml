@@ -67,7 +67,7 @@ persistence:
 resources:
   requests:
     memory: 256Mi
-    cpu: 100m
+    cpu: 300m
 
 # A load balander might confuse Minikube when installing with Helm and --wait
 # Probably this is only useful for minikube environments and CI

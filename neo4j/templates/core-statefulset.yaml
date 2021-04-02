@@ -45,7 +45,7 @@ spec:
             - name: NEO4J_dbms_mode
               value: CORE
             - name: NEO4J_dbms_memory_heap_max__size
-              value: "3G"
+              value: "5G"
             - name: NUMBER_OF_CORES
               value: "{{ .Values.core.numberOfServers }}"
             - name: AUTH_ENABLED
@@ -107,9 +107,9 @@ spec:
               mountPath: /plugins
           resources:
             limits:      # 1,9 core tetto massimo (limit >= request altrimenti il pod non si avvia) - overbooking
-              cpu: 2000m #1900m
+              cpu: 5000m #1900m
             requests:    # valore monopolizzato dal pod, indipendentemente dalle risorse reali impiegate
-              cpu: 2000m #1900m
+              cpu: 5000m #1900m
 {{/*            {{ toYaml .Values.resources | indent 10 }}*/}}
             {{- if .Values.core.sidecarContainers }}
             {{ toYaml .Values.core.sidecarContainers | indent 6 }}
