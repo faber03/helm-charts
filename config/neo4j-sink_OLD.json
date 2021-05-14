@@ -5,8 +5,12 @@
     "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
 
     "tasks.max": "3",
+    "neo4j.batch.parallelize": false,
+    "errors.tolerance": "all",
     "neo4j.batch.size": "10",
-    "neo4j.batch.timeout.msecs": 60000,
+    "neo4j.batch.timeout.msecs": 1000,
+    "errors.deadletterqueue.topic.name": "DLQ-Northbound",
+    "kafka.bootstrap.servers": "kafka-cp-kafka-headless:9092",
 
     "errors.retry.timeout": "-1",
     "errors.retry.delay.max.ms": "1000",

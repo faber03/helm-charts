@@ -33,7 +33,8 @@ configurationOverrides:
   "config.storage.replication.factor": "3"
   "offset.storage.replication.factor": "3"
   "status.storage.replication.factor": "3"
-  "max.poll.records": "10"
+  "consumer.max.poll.records": "1" #default 500
+  "consumer.max.poll.interval.ms": "600000" #default 30000
 
 ## Kafka Connect JVM Heap Option
 heapOptions: "-Xms512M -Xmx512M"
@@ -43,16 +44,17 @@ heapOptions: "-Xms512M -Xmx512M"
 customEnv: {}
   # CUSTOM_SCRIPT_PATH: /etc/scripts/create-connectors.sh
 
-resources: {}
+resources:
+  #{}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #  cpu: 100m
+   limits:
+    cpu: 1000m
   #  memory: 128Mi
-  # requests:
-  #  cpu: 100m
+   requests:
+    cpu: 1000m
   #  memory: 128Mi
 
 ## Custom pod annotations

@@ -33,6 +33,18 @@ spec:
       {{- end }}
       {{- end }}
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - compute1
+                      - compute2
+#      nodeSelector:
+#        kubernetes.io/hostname: compute1
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
@@ -69,6 +81,9 @@ spec:
             {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          args:
+            - -cpus
+            - "1"
           env:
             - name: CONNECT_REST_ADVERTISED_HOST_NAME
               valueFrom:

@@ -6,7 +6,7 @@ oc project tesi-delucia
 
 #NEO4j
 #-----
-helm delete neo4j
+#helm delete neo4j
 #oc delete pvc datadir-neo4j-neo4j-core-0
 #oc delete pvc datadir-neo4j-neo4j-core-1
 #oc delete pvc datadir-neo4j-neo4j-core-2
@@ -39,7 +39,7 @@ helm delete kafka-connect-neo4j
 
 #KAFKA PVC
 #----------
-oc delete pvc datadir-kafka-cp-zookeeper-2
+(oc delete pvc datadir-kafka-cp-zookeeper-2
 oc delete pvc datadir-kafka-cp-zookeeper-1
 oc delete pvc datadir-kafka-cp-zookeeper-0
 oc delete pvc datadir-0-kafka-cp-kafka-2
@@ -47,11 +47,11 @@ oc delete pvc datadir-0-kafka-cp-kafka-1
 oc delete pvc datadir-0-kafka-cp-kafka-0
 oc delete pvc datalogdir-kafka-cp-zookeeper-0
 oc delete pvc datalogdir-kafka-cp-zookeeper-1
-oc delete pvc datalogdir-kafka-cp-zookeeper-2
+oc delete pvc datalogdir-kafka-cp-zookeeper-2)
 
 #eliminazione connettori
 #-----------------------
-curl -s -X DELETE http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors/artemis-source
+curl -s -X DELETE http://connect-artemis-tesi-delucia.router.default.svc.cluster.local/connectors/artemis-source
 
 curl -s -X DELETE http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors/neo4j-sink
 

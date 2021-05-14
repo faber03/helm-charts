@@ -1,0 +1,24 @@
+{
+  "name": "neo4j-sink",
+  "config": {
+    "topics": "Lyon-Northbound",
+    "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
+
+    "tasks.max": "6",
+    "neo4j.batch.parallelize": false,
+    "errors.tolerance": "all",
+    "errors.deadletterqueue.topic.name": "DLQ-Northbound",
+    "kafka.bootstrap.servers": "kafka-cp-kafka-headless:9092",
+    "neo4j.batch.size": "1",
+
+    "errors.retry.timeout": "-1",
+    "errors.retry.delay.max.ms": "1000",
+    "errors.log.enable": true,
+    "errors.log.include.messages": true,
+    "neo4j.server.uri": "bolt://neo4j-neo4j-core-0.tesi-delucia.svc:7687",
+    "neo4j.authentication.basic.username": "neo4j",
+    "neo4j.authentication.basic.password": "password",
+    "neo4j.encryption.enabled": false,
+    "neo4j.topic.cypher.Lyon-Northbound": "MERGE ()-[s:STREET {linkId: event.linkId}]->() SET s.avgTravelTime = event.avgTravelTime,  s.sdTravelTime = event.sdTravelTime,  s.numVehicles = event.numVehicles,  s.timestamp = event.timestamp,  s.aggPeriod = duration({seconds: event.aggPeriod.seconds, nanoseconds: event.aggPeriod.nanos}),  s.startTime = localdatetime({year: event.startTime.date.year,month: event.startTime.date.month,day: event.startTime.date.day,hour: event.startTime.time.hour,minute: event.sample.startTime.time.minute,second: event.startTime.time.second,nanosecond: event.startTime.time.nano}),  s.endTime = localdatetime({year: event.endTime.date.year,month: event.endTime.date.month,day: event.endTime.date.day,hour: event.endTime.time.hour,minute: event.endTime.time.minute,second: event.endTime.time.second,nanosecond: event.endTime.time.nano})"
+  }
+}

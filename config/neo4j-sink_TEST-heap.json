@@ -1,0 +1,24 @@
+{
+  "name": "neo4j-sink",
+  "config": {
+    "topics": "Lyon-Northbound",
+    "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
+
+    "tasks.max": "6",
+    "neo4j.batch.parallelize": false,
+    "errors.tolerance": "all",
+    "errors.deadletterqueue.topic.name": "DLQ-Northbound",
+    "kafka.bootstrap.servers": "kafka-cp-kafka-headless:9092",
+    "neo4j.batch.size": "1",
+
+    "errors.retry.timeout": "-1",
+    "errors.retry.delay.max.ms": "1000",
+    "errors.log.enable": true,
+    "errors.log.include.messages": true,
+    "neo4j.server.uri": "bolt://neo4j-neo4j-core-0.tesi-delucia.svc:7687",
+    "neo4j.authentication.basic.username": "neo4j",
+    "neo4j.authentication.basic.password": "password",
+    "neo4j.encryption.enabled": false,
+    "neo4j.topic.cypher.Lyon-Northbound": "MATCH (i:Intersection {osmid:1}) CALL algo.shortestPath.deltaStepping.stream(i, 'weight', 1) YIELD nodeId, distance RETURN max(distance)"
+  }
+}

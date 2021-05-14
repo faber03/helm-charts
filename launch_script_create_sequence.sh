@@ -13,8 +13,8 @@ sleep 100
 
 #NEO4j
 #-----
-(cd neo4j || exit;
-helm install neo4j .)
+#(cd neo4j || exit;
+#helm install neo4j .)
 
 sleep 60
 
@@ -47,4 +47,4 @@ curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json 
 sleep 45
 
 (cd config || exit;
-curl -s -X POST -H 'Content-Type: application/json' --data @neo4j-sink.json  http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors)
+curl -s -X POST -H 'Content-Type: application/json' --data @neo4j-sink_TEST.json  http://connect-neo4j-tesi-delucia.router.default.svc.cluster.local/connectors)

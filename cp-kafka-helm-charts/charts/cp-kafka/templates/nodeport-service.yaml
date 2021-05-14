@@ -20,6 +20,7 @@ metadata:
 spec:
   type: NodePort
   ports:
+    #- name: kafka
     - name: external-broker
       port: {{ $servicePort }}
       targetPort: {{ $externalListenerPort }}

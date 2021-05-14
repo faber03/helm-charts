@@ -4,7 +4,8 @@ metadata:
   name: "{{ template "neo4j.core.fullname" . }}"
 spec:
   serviceName: {{ template "neo4j.fullname" . }}
-  replicas: 3
+  #replicas: 3 -*-
+  replicas: 1
   selector:
     matchLabels:
       release: {{ .Release.Name | quote }}
@@ -19,8 +20,8 @@ spec:
         app: {{ template "neo4j.name" . }}
         component: core
     spec:
-#      nodeSelector:
-#        kubernetes.io/hostname: compute3
+      nodeSelector:
+        kubernetes.io/hostname: compute3
       containers:
         - name: {{ template "neo4j.fullname" . }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
@@ -43,7 +44,8 @@ spec:
             - name:  NEO4J_dbms_logs_query_page__logging__enabled
               value: "true"
             - name: NEO4J_dbms_mode
-              value: CORE
+              #value: CORE -*-
+              value: SINGLE
             - name: NEO4J_dbms_memory_heap_max__size
               value: "5G"
             - name: NUMBER_OF_CORES
@@ -54,11 +56,11 @@ spec:
               value: "apoc.\\*,algo.\\*"
             - name: NEO4J_apoc_export_file_enabled
               value: "true"
-            - name: NEO4J_causal__clustering_discovery__type
-              value: DNS
-            - name: NEO4J_causal__clustering_initial__discovery__members
-              value: "{{ template "neo4j.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}:5000"
-                  {{- if .Values.authEnabled }}
+#            - name: NEO4J_causal__clustering_discovery__type -*-
+#              value: DNS
+#            - name: NEO4J_causal__clustering_initial__discovery__members
+#              value: "{{ template "neo4j.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}:5000"
+#                  {{- if .Values.authEnabled }}
             - name: NEO4J_SECRETS_PASSWORD
               valueFrom:
                 secretKeyRef:
