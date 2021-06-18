@@ -1,1 +1,3 @@
 readreplicas-deployment.yaml
+neo4j-neo4j-core-1.yml
+neo4j-neo4j-core-2.yml
