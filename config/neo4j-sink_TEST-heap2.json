@@ -4,7 +4,7 @@
     "topics": "Lyon-Northbound",
     "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
 
-    "tasks.max": "1",
+    "tasks.max": "7",
     "neo4j.batch.parallelize": false,
     "errors.tolerance": "all",
     "errors.deadletterqueue.topic.name": "DLQ-Northbound",
@@ -19,6 +19,6 @@
     "neo4j.authentication.basic.username": "neo4j",
     "neo4j.authentication.basic.password": "password",
     "neo4j.encryption.enabled": false,
-    "neo4j.topic.cypher.Lyon-Northbound": "MATCH (i:Intersection {osmid: event.linkId}) CALL algo.shortestPath.deltaStepping.stream(i, 'weight', 1) YIELD nodeId, distance RETURN max(distance)"
+    "neo4j.topic.cypher.Lyon-Northbound": "MATCH (start:Intersection{osmid:event.linkId}), (end:Intersection{osmid:event.timestamp}) CALL algo.shortestPath.stream(start, end, 'weight',{direction:'OUTGOING'}) YIELD nodeId, cost RETURN algo.asNode(nodeId).osmid as vertexKeys"
   }
 }

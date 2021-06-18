@@ -34,7 +34,8 @@ configurationOverrides:
   "offset.storage.replication.factor": "3"
   "status.storage.replication.factor": "3"
   "consumer.max.poll.records": "1" #default 500
-  "consumer.max.poll.interval.ms": "600000" #default 30000
+  "consumer.max.poll.interval.ms": "1800000" #(30m), previous 600000(10m), default 300000(5m)
+  "offset.flush.timeout.ms": "600000" #(10m), previous 120000(2m) #default 5000(5s)
 
 ## Kafka Connect JVM Heap Option
 heapOptions: "-Xms512M -Xmx512M"

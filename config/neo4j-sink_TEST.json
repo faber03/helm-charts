@@ -4,7 +4,7 @@
     "topics": "Lyon-Northbound",
     "connector.class": "streams.kafka.connect.sink.Neo4jSinkConnector",
 
-    "tasks.max": "6",
+    "tasks.max": "9",
     "neo4j.batch.parallelize": false,
     "errors.tolerance": "all",
     "errors.deadletterqueue.topic.name": "DLQ-Northbound",
